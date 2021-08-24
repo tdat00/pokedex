@@ -1,3 +1,3 @@
 # Pokedex
 
-TBD.
+Yet another Pokedex.
