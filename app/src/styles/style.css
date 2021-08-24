@@ -1,0 +1,13 @@
+.card {
+  margin-bottom: 1em;
+}
+
+.btn {
+  margin-right: 0.2em;
+  margin-bottom: 0.2em;
+  border-radius: 0.5em;
+}
+
+.btn-clear {
+  display: inline-block;
+}
