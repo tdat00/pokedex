@@ -113,23 +113,40 @@ class Pokedex extends React.Component {
   }
 
   findPokemons(selectedTypes) {
+    if (selectedTypes.length == 0) return [];
+
     let selectedType1 = selectedTypes.length > 0 ? this.TYPE_IDS[selectedTypes[0].toUpperCase()] : null;
     let selectedType2 = selectedTypes.length > 1 ? this.TYPE_IDS[selectedTypes[1].toUpperCase()] : null;
+
     let pokemons = [];
     Object.values(POKEDEX).forEach(pokemon => {
-      if (
-        (pokemon.type1 === selectedType1 && pokemon.type2 === selectedType2)
-        || (pokemon.type1 === selectedType2 && pokemon.type2 === selectedType1)
-      ) {
-        pokemons.push(pokemon);
+      if (selectedType2 !== null) { // selected 2 types
+        if (
+          (pokemon.type1 === selectedType1 && pokemon.type2 === selectedType2)
+          || (pokemon.type1 === selectedType2 && pokemon.type2 === selectedType1)
+        ) {
+          pokemons.push(pokemon);
+        }
       }
+      else { // selected 1 type
+        if (pokemon.type1 === selectedType1 || pokemon.type2 == selectedType1) {
+          pokemons.push(pokemon);
+        }
+      }
+
     });
     pokemons = pokemons.sort((a, b) => a.name.localeCompare(b.name));
     return pokemons;
   }
 
   createButton(type, action) {
+    if (!type) return;
     return (<Button key={action+type} color="Dark" style={{backgroundColor: COLORS[type.toUpperCase()]}} onClick={() => this.onButtonClick(type, action)}>{type}</Button>);
+  }
+
+  createBadge(type) {
+    if (!type) return;
+    return (<span className="badge" style={{color: "black", backgroundColor: COLORS[type.toUpperCase()]}}>{type}</span>);
   }
 
   render() {
@@ -162,14 +179,15 @@ class Pokedex extends React.Component {
                 <Row>
                   <CardTitle><a className="clickable" onClick={this.toggle.bind(this)}><h5>Possible pokemons: <strong>{ (this.state._pokemons || []).length}</strong></h5></a></CardTitle>
                   <div className={this.state._isOpenPokemonList ? "collapse show" : "collapse"}>
-                    <table className="center">{ (this.state._pokemons || []).map(pokemon => (
+                    <table className="center"><tbody>{ (this.state._pokemons || []).map(pokemon => (
                       <tr className="align-bottom border-bottom">
                         <td style={{textAlign: "left"}}>{pokemon.id}</td>
                         <td style={{paddingLeft: "10px"}}>{pokemon.name}</td>
+                        <td style={{paddingLeft: "10px"}}>{this.createBadge(TYPES[pokemon.type1].name)} {this.createBadge(TYPES[pokemon.type2]?.name)}</td>
                         <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} /></td>
                         <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} className="silhouette" /></td>
                       </tr>
-                    ))}</table>
+                    ))}</tbody></table>
                   </div>
                 </Row>
                 <Row>&nbsp;</Row>
