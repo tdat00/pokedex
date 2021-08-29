@@ -18,7 +18,8 @@ class Pokedex extends React.Component {
       _selectedTypes: [],
       _damage: [],
       _pokemons: [],
-      _isOpenPokemonList: false
+      _isOpenPokemonList: false,
+      _silhouette: false
     };
 
     Object.keys(TYPES).forEach(key => {
@@ -53,8 +54,12 @@ class Pokedex extends React.Component {
     return true;
   }
 
-  toggle() {
+  toggleCollapse() {
     this.setState({ _isOpenPokemonList: !this.state._isOpenPokemonList });
+  }
+
+  toggleSilhouette() {
+    this.setState({ _silhouette: !this.state._silhouette });
   }
 
   onButtonClick(type, action) {
@@ -177,7 +182,7 @@ class Pokedex extends React.Component {
                 </Row>
                 <Row>&nbsp;</Row>
                 <Row>
-                  <CardTitle><a className="clickable" onClick={this.toggle.bind(this)}><h5>Possible pokemons: <strong>{ (this.state._pokemons || []).length}</strong></h5></a></CardTitle>
+                  <CardTitle><a className="clickable" onClick={this.toggleCollapse.bind(this)}><h5>Possible pokemons: <strong>{ (this.state._pokemons || []).length}</strong></h5></a></CardTitle>
                   <div className={this.state._isOpenPokemonList ? "collapse show" : "collapse"}>
                     <table className="center">
                       <tbody>
@@ -186,8 +191,7 @@ class Pokedex extends React.Component {
                               <td style={{textAlign: "left"}}>{pokemon.national}</td>
                               <td style={{paddingLeft: "10px", width: "30%"}}>{pokemon.fullname}</td>
                               <td style={{paddingLeft: "10px", textAlign: "right"}}>{this.createBadge(TYPES[pokemon.type1].name)} {this.createBadge(TYPES[pokemon.type2]?.name)}</td>
-                              <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} /></td>
-                              <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} className="silhouette" /></td>
+                              <td style={{width: "112px"}}><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} onClick={this.toggleSilhouette.bind(this)} className={ this.state._silhouette ? "silhouette" : ""} /></td>
                             </tr>
                           ))}
                       </tbody>
