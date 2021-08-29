@@ -11,3 +11,24 @@
 .btn-clear {
   display: inline-block;
 }
+
+a.clickable {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+img.silhouette {
+  -webkit-filter: grayscale(100%) brightness(0);
+  filter: grayscale(100%) brightness(0);
+  opacity: 0.6;
+}
+
+.center {
+  margin: auto;
+  width: 50% !important;
+}
+
+tr.border-bottom {
+  border-bottom: 0.5px dash;
+}

@@ -1,0 +1,92 @@
+{
+  "1": {
+      "id": 1,
+      "name": "Normal",
+      "alias": "normal"
+  },
+  "2": {
+      "id": 2,
+      "name": "Fire",
+      "alias": "fire"
+  },
+  "3": {
+      "id": 3,
+      "name": "Water",
+      "alias": "water"
+  },
+  "4": {
+      "id": 4,
+      "name": "Electric",
+      "alias": "electric"
+  },
+  "5": {
+      "id": 5,
+      "name": "Grass",
+      "alias": "grass"
+  },
+  "6": {
+      "id": 6,
+      "name": "Ice",
+      "alias": "ice"
+  },
+  "7": {
+      "id": 7,
+      "name": "Fighting",
+      "alias": "fighting"
+  },
+  "8": {
+      "id": 8,
+      "name": "Poison",
+      "alias": "poison"
+  },
+  "9": {
+      "id": 9,
+      "name": "Ground",
+      "alias": "ground"
+  },
+  "10": {
+      "id": 10,
+      "name": "Flying",
+      "alias": "flying"
+  },
+  "11": {
+      "id": 11,
+      "name": "Psychic",
+      "alias": "psychic"
+  },
+  "12": {
+      "id": 12,
+      "name": "Bug",
+      "alias": "bug"
+  },
+  "13": {
+      "id": 13,
+      "name": "Rock",
+      "alias": "rock"
+  },
+  "14": {
+      "id": 14,
+      "name": "Ghost",
+      "alias": "ghost"
+  },
+  "15": {
+      "id": 15,
+      "name": "Dragon",
+      "alias": "dragon"
+  },
+  "16": {
+      "id": 16,
+      "name": "Dark",
+      "alias": "dark"
+  },
+  "17": {
+      "id": 17,
+      "name": "Steel",
+      "alias": "steel"
+  },
+  "18": {
+      "id": 18,
+      "name": "Fairy",
+      "alias": "fairy"
+  }
+}
