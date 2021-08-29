@@ -113,7 +113,7 @@ class Pokedex extends React.Component {
   }
 
   findPokemons(selectedTypes) {
-    if (selectedTypes.length == 0) return [];
+    if (selectedTypes.length === 0) return [];
 
     let selectedType1 = selectedTypes.length > 0 ? this.TYPE_IDS[selectedTypes[0].toUpperCase()] : null;
     let selectedType2 = selectedTypes.length > 1 ? this.TYPE_IDS[selectedTypes[1].toUpperCase()] : null;
@@ -129,7 +129,7 @@ class Pokedex extends React.Component {
         }
       }
       else { // selected 1 type
-        if (pokemon.type1 === selectedType1 || pokemon.type2 == selectedType1) {
+        if (pokemon.type1 === selectedType1 || pokemon.type2 === selectedType1) {
           pokemons.push(pokemon);
         }
       }
@@ -179,25 +179,29 @@ class Pokedex extends React.Component {
                 <Row>
                   <CardTitle><a className="clickable" onClick={this.toggle.bind(this)}><h5>Possible pokemons: <strong>{ (this.state._pokemons || []).length}</strong></h5></a></CardTitle>
                   <div className={this.state._isOpenPokemonList ? "collapse show" : "collapse"}>
-                    <table className="center"><tbody>{ (this.state._pokemons || []).map(pokemon => (
-                      <tr className="align-bottom border-bottom">
-                        <td style={{textAlign: "left"}}>{pokemon.id}</td>
-                        <td style={{paddingLeft: "10px"}}>{pokemon.name}</td>
-                        <td style={{paddingLeft: "10px"}}>{this.createBadge(TYPES[pokemon.type1].name)} {this.createBadge(TYPES[pokemon.type2]?.name)}</td>
-                        <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} /></td>
-                        <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} className="silhouette" /></td>
-                      </tr>
-                    ))}</tbody></table>
+                    <table className="center">
+                      <tbody>
+                          { (this.state._pokemons || []).map(pokemon => (
+                            <tr className="align-bottom border-bottom">
+                              <td style={{textAlign: "left"}}>{pokemon.national}</td>
+                              <td style={{paddingLeft: "10px", width: "30%"}}>{pokemon.fullname}</td>
+                              <td style={{paddingLeft: "10px", textAlign: "right"}}>{this.createBadge(TYPES[pokemon.type1].name)} {this.createBadge(TYPES[pokemon.type2]?.name)}</td>
+                              <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} /></td>
+                              <td><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} className="silhouette" /></td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
                   </div>
                 </Row>
                 <Row>&nbsp;</Row>
                 <Row>
                   <CardTitle><h5>Damage Chart:</h5></CardTitle>
                   { (this.state._damage || []).map(damage => (
-                    <Row style={{marginBottom: '0.5rem'}}>
-                      <Col style={{textAlign: 'right'}}><span class="btn btn-Dark" style={{backgroundColor: COLORS[damage.type.toUpperCase()]}}>{damage.type}</span></Col>
-                      <Col style={{verticalAlign: 'center'}}><span class="btn">{damage.value}</span></Col>
-                    </Row>
+                    <div className="row" style={{marginBottom: '0.5rem'}}>
+                      <div className="col" style={{textAlign: 'right'}}><span className="btn btn-Dark" style={{backgroundColor: COLORS[damage.type.toUpperCase()]}}>{damage.type}</span></div>
+                      <div className="col" style={{verticalAlign: 'center'}}><span className="btn">{damage.value}</span></div>
+                    </div>
                   ))}
                 </Row>
               </CardBody>
