@@ -30,6 +30,10 @@ class Pokedex extends React.Component {
     });
   }
 
+  componentDidMount() {
+    document.title = "Just another Pokedex";
+  }
+
   sort_and_distinct(array) {
     array.sort();
     let result = [];
@@ -140,7 +144,7 @@ class Pokedex extends React.Component {
       }
 
     });
-    pokemons = pokemons.sort((a, b) => a.name.localeCompare(b.name));
+    pokemons = pokemons.sort((a, b) => a.national - b.national);
     return pokemons;
   }
 
@@ -156,7 +160,7 @@ class Pokedex extends React.Component {
 
   render() {
     return (
-      <Container className="container-fluid">
+      <Container>
         <Row>
           <Col><h1>Pokedex</h1></Col>
         </Row>
@@ -182,14 +186,14 @@ class Pokedex extends React.Component {
                 </Row>
                 <Row>&nbsp;</Row>
                 <Row>
-                  <CardTitle><a className="clickable" onClick={this.toggleCollapse.bind(this)}><h5>Possible pokemons: <strong>{ (this.state._pokemons || []).length}</strong></h5></a></CardTitle>
+                  <CardTitle><a onClick={this.toggleCollapse.bind(this)}><h5>Possible pokemons: <strong>{ (this.state._pokemons || []).length}</strong></h5></a></CardTitle>
                   <div className={this.state._isOpenPokemonList ? "collapse show" : "collapse"}>
                     <table className="center">
                       <tbody>
                           { (this.state._pokemons || []).map(pokemon => (
                             <tr className="align-bottom border-bottom">
-                              <td style={{textAlign: "left"}}>{pokemon.national}</td>
-                              <td style={{paddingLeft: "10px", width: "30%"}}>{pokemon.fullname}</td>
+                              <td style={{textAlign: "left"}}><a href={`https://pokemondb.net/pokedex/${pokemon.alias}`} target="_blank">{pokemon.national}</a></td>
+                              <td style={{paddingLeft: "10px", width: "30%"}}><a href={`https://pokemondb.net/pokedex/${pokemon.alias}`} target="_blank">{pokemon.fullname}</a></td>
                               <td style={{paddingLeft: "10px", textAlign: "right"}}>{this.createBadge(TYPES[pokemon.type1].name)} {this.createBadge(TYPES[pokemon.type2]?.name)}</td>
                               <td style={{width: "112px"}}><img width="112" heigh="84" src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon.img}.png`} onClick={this.toggleSilhouette.bind(this)} className={ this.state._silhouette ? "silhouette" : ""} /></td>
                             </tr>
@@ -207,6 +211,11 @@ class Pokedex extends React.Component {
                       <div className="col" style={{verticalAlign: 'center'}}><span className="btn">{damage.value}</span></div>
                     </div>
                   ))}
+                </Row>
+                <Row>&nbsp;</Row>
+                <Row>
+                  <Col xs="9"></Col>
+                  <Col xs="3" className="thankyou"><span>Powered by <a href="https://pokemondb.net/" target="_blank">PokemonDB</a></span></Col>
                 </Row>
               </CardBody>
             </Card>

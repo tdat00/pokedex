@@ -12,7 +12,7 @@
   display: inline-block;
 }
 
-a.clickable {
+a {
   cursor: pointer;
   color: inherit;
   text-decoration: none;
@@ -31,4 +31,10 @@ img.silhouette {
 
 tr.border-bottom {
   border-bottom: 0.5px dash;
+}
+
+.thankyou {
+  text-align: right;
+  font-size: xx-small;
+  opacity: 60%;
 }
